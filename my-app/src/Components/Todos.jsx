@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getTodoreq, getTodosucc, postTodoerr, postTodoreq, postTodosucc } from '../Redux/action'
+import { getTodoreq, getTodosucc, postTodoerr, postTodoreq, postTodosucc } from '../Redux/Todos/action'
 import TodoInput from './TodoInput'
 
 const Todos = () => {
 
  const dispatch = useDispatch()
- const todos = useSelector((store)=>store.todos)
- const loading = useSelector((store)=>store.isLoading)
- const error = useSelector((store)=>store.isError)
+ const todos = useSelector((store)=>store.TodoReducer.todos)
+ const loading = useSelector((store)=>store.TodoReducer.isLoading)
+ const error = useSelector((store)=>store.TodoReducer.isError)
 
  const getTodos=async()=>{
     
@@ -39,15 +39,16 @@ const Todos = () => {
             
             let res = await fetch (`http://localhost:8080/todos`,{
                 method:'POST',
-                body:payload,
+                body:JSON.stringify(payload),
                 headers:{
                     "Content-type":"application/json"
                 }
             })
             
+            res = await res.json()
             console.log(res)
-            // res = await res.json()
-            dispatch(postTodosucc(payload))
+
+            dispatch(postTodosucc(res))
         } catch (error) {
             dispatch(postTodoerr())
         }

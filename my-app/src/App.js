@@ -1,9 +1,10 @@
-import {useState} from 'react'
+
 import './App.css';
  
-  import { addHandler,reduceHandler } from './Redux/action';
+ 
 import { useDispatch, useSelector } from 'react-redux';
 import Todos from './Components/Todos';
+import Counter from './Components/Counter';
 function App() {
 
 // const dispatch = useDispatch()
@@ -13,7 +14,7 @@ function App() {
   // console.log(count)
   return (
     <div className="App">
-     
+     <Counter/>
      <Todos/>
      
     </div>

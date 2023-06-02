@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 
 const TodoInput = ({addTodo}) => {
-    const [text,setText] = useState(' ')
+    const [text,setText] = useState('')
     const handleAdd=()=>{
-      addTodo(text)
-      setText(' ')
+        if(text.length){
+
+            addTodo(text)
+            setText('')
+        }
     }
   return (
     <div>
